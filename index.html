@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+
+    <div id="screenshot" class="container" @mousemove="move" @mousedown="mouseDown" @mouseup="mouseUp">
+
+        <transition name="screenshot">
+          <div class="Flash" v-if="tookScreenShot"></div>
+        </transition>
+
+        <img src="kendrick-lamar.png" alt="">
+
+
+        <div class="overlay" v-if="isDragging && mouseIsDown" :class="{ 'highlighting' : mouseIsDown }" :style="{ borderWidth: borderWidth }"></div>
+
+        <div class="crosshairs" v-if="isDragging && mouseIsDown" :class="{ 'hidden' : isDragging }" :style="{ left: crossHairsLeft + 'px', top: crossHairsTop + 'px' }"></div>
+
+        <div class="borderedBox" :class="{ 'hidden': !isDragging }" :style="{ left: boxLeft + 'px', top: boxTop + 'px', width: boxEndWidth + 'px', height: boxEndHeight + 'px' }"></div>
+
+        <span class="tooltip" :class="{ 'hidden': !isDragging }" :style="{ left: toolTipLeft + 'px', top: toolTipTop + 'px'}">{{boxEndWidth}} x {{boxEndHeight}}px</span>
+    </div>
+
+        <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.1/dist/jquery.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/vue@2.7.10/dist/vue.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/axios@1.1.0/dist/axios.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js"></script>
+
+        <script src="js/app.js"></script>
+
+</body>
+</html>

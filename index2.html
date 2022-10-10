@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+</head>
+
+<body>
+
+    <div id="screenshot" class="container" @mousemove="move" @mousedown="mouseDown" @mouseup="mouseUp">
+
+
+        <div id="capture">
+            <img src="kendrick-lamar.png" alt="">
+            <textarea maxlength="110">Click to edit...</textarea>
+          </div>
+
+        <button @click="downloadClick()">Download</button>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.1/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.10/dist/vue.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios@1.1.0/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js"></script>
+
+    <script>
+        let scrrenshot = new Vue({
+            el: '#screenshot',
+            data: {
+
+            },
+            methods: {
+                move() {},
+                mouseDown() {},
+                mouseUp() {},
+                download(url) {
+                    var a = $("<a style='display:none' id='js-downloder'>")
+                        .attr("href", url)
+                        .attr("download", "test.png")
+                        .appendTo("body");
+
+                    a[0].click();
+
+                    a.remove();
+                },
+                saveCapture(element) {
+                    html2canvas(element).then((canvas) => {
+                        this.download(canvas.toDataURL("image/png"));
+                    })
+                },
+
+                downloadClick() {
+                    var element = document.querySelector("#capture");
+                    this.saveCapture(element)
+                }
+
+
+            },
+            mounted() {
+
+            }
+        })
+
+    </script>
+</body>
+
+</html>
